@@ -13,7 +13,7 @@ func hit(ch chan int) {
 		fmt.Println("Ping lost")
 		return
 	}
-	i = (i*3 + 2) / 5
+	i = i*3 + 29
 	fmt.Printf("Ping Hit %d \n", i)
 
 	go receive(ch)
@@ -23,7 +23,7 @@ func hit(ch chan int) {
 
 func receive(ch chan int) {
 	i := <-ch
-	if i%7 == 0 {
+	if i%9 == 0 {
 		fmt.Println("Pong lost")
 		return
 	}
@@ -35,7 +35,7 @@ func receive(ch chan int) {
 }
 
 func main() {
-	rand.Seed(20)
+	rand.Seed(time.Now().UnixNano())
 	r := rand.Intn(100)
 	var ch = make(chan int)
 	fmt.Printf("Serving with %d \n", r)
