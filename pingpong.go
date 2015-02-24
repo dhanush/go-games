@@ -13,6 +13,7 @@ func hit(ch chan int) {
 		fmt.Println("Ping lost")
 		return
 	}
+	fmt.Printf("Ping Received %d \n", i)
 	i = i*3 + 29
 	fmt.Printf("Ping Hit %d \n", i)
 
@@ -30,7 +31,9 @@ func receive(ch chan int) {
 	fmt.Printf("Pong Received %d \n", i)
 	go hit(ch)
 	time.Sleep(100 * time.Millisecond)
-	ch <- i + 1
+	i = i + 1
+	ch <- i
+	fmt.Printf("Pong Hit %d \n", i)
 
 }
 
